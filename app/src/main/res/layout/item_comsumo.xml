@@ -1,65 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white">
 
-    <ImageView
-        android:id="@+id/imageMovie"
-        android:layout_gravity="center"
-        android:paddingEnd="16dp"
-        android:paddingLeft="16dp"
-        android:paddingStart="16dp"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:contentDescription="@string/app_name"
-        android:scaleType="fitXY"
-        android:src="@drawable/cuenta"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="222dp" />
+    android:layout_width="match_parent"
 
-    <TextView
-        android:id="@+id/textMovieTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingEnd="16dp"
-        android:paddingLeft="16dp"
-        android:paddingStart="16dp"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@id/imageMovie"
-        tools:text="Avengers" />
-    <TextView
-        android:id="@+id/textMovieBody"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:paddingEnd="16dp"
-        android:paddingLeft="16dp"
-        android:paddingStart="16dp"
-        android:textColor="@android:color/black"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@id/imageMovie"
-        app:layout_constraintTop_toBottomOf="@id/textMovieTitle"
-        tools:text="Views: 100" />
+    app:cardCornerRadius="6dp"
+    android:padding="3dp"
+    android:layout_margin="5dp"
+    app:cardElevation="5dp">
 
 
-    <TextView
-        android:id="@+id/textReleaseDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:paddingEnd="16dp"
-        android:paddingLeft="16dp"
-        android:paddingStart="16dp"
-        android:textColor="@android:color/black"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@id/imageMovie"
+    <LinearLayout
+        android:orientation="horizontal"
 
-        tools:text="Release Date: 16 Feb 2018" />
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/imageMovie"
+
+            android:paddingEnd="16dp"
+            android:paddingLeft="16dp"
+            android:paddingStart="16dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/cuenta"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="222dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+
+                android:id="@+id/textMovieTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="16dp"
+                android:paddingLeft="16dp"
+                android:paddingStart="16dp"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:text="Avengers" />
+
+            <TextView
+                android:id="@+id/textMovieBody"
+
+                android:maxLines="2" android:ellipsize="end"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:paddingStart="16dp"
+                android:paddingLeft="16dp"
+                android:paddingEnd="16dp"
+                android:text="Views: 100"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="14sp"
+                />
+
+
+            <TextView
+                android:id="@+id/textReleaseDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:paddingEnd="16dp"
+                android:paddingLeft="16dp"
+                android:paddingStart="16dp"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@id/imageMovie"
+
+                android:text="Release Date: 16 Feb 2018" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

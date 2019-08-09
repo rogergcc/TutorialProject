@@ -13,9 +13,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NoConnectionError;
@@ -36,11 +40,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private String b;
 
     private String[] dataArray;
@@ -51,12 +56,23 @@ public class MainActivity extends AppCompatActivity {
     private GsonBuilder builder;
     RecyclerView recyclerView;
     ConsumoApiAdapter adapterapi;
+
+    Spinner cmbDocumento;
+
+    ArrayAdapter<String> comboAdapter;
+    private ArrayList<String> listaFrutas;
+    String nombreFruta;
+    private String[] strFrutas;
+    TextView txtCambiado;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         dataArray = getResources().getStringArray(R.array.arr_list);
         recyclerView= findViewById(R.id.milista);
+
+        cmbDocumento = (Spinner)findViewById(R.id.cmbDocumento);
+
 
 //        pd = new ProgressDialog(this);
         pd = new ProgressDialog(this,R.style.MyAlertDialogStyle);
@@ -65,6 +81,20 @@ public class MainActivity extends AppCompatActivity {
         pd.setMessage("Recibiendo Datos");
         pd.setCancelable(false);
         pd.show();
+
+        cmbDocumento.setOnItemSelectedListener(this);
+        //Convierto la variable List<> en un ArrayList<>()
+        listaFrutas = new ArrayList<>();
+        //Arreglo con nombre de frutas
+        strFrutas = new String[] {"Pera", "Manzana", "Fresa", "Sandia", "Mango"};
+        //Agrego las frutas del arreglo `strFrutas` a la listaFrutas
+        Collections.addAll(listaFrutas, strFrutas);
+        //Implemento el adapter con el contexto, layout, listaFrutas
+        comboAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, listaFrutas);
+        //Cargo el spinner con los datos
+        cmbDocumento.setAdapter(comboAdapter);
+
+        txtCambiado=findViewById(R.id.txtCambiado);
 
         posts = new ArrayList<>();
         //ConsumoAdapter adapter = new ConsumoAdapter(dataArray);
@@ -139,6 +169,28 @@ public class MainActivity extends AppCompatActivity {
 
         //AppSin
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getId()){
+            case R.id.cmbDocumento:
+                //Almaceno el nombre de la fruta seleccionada
+                nombreFruta = strFrutas[position];
+                cambiarTexto(nombreFruta);
+                Toast.makeText(this, "Nombre fruta: " + nombreFruta, Toast.LENGTH_SHORT).show();
+
+                break;
+        }
+    }
+
+    private void cambiarTexto(String nombreFruta) {
+        txtCambiado.setText(nombreFruta);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 
